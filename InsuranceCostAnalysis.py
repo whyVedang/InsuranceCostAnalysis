@@ -26,11 +26,11 @@ df['age']=df[['age']].fillna(mean_age)
 df[["charges"]] = np.round(df[["charges"]],2)
 xdata=df['smoker']
 ydata=df['charges']
-# sns.regplot(x=xdata,y=ydata,data=df,line_kws={"color": "red"})
-# sns.boxplot(x='smoker',y='charges',data=df)
-# plt.ylim(0,)
-# plt.show()
-# print(df.corr())
+sns.regplot(x=xdata,y=ydata,data=df,line_kws={"color": "red"})
+sns.boxplot(x='smoker',y='charges',data=df)
+plt.ylim(0,)
+plt.show()
+print(df.corr())
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -45,12 +45,12 @@ lr1=LinearRegression()
 bigdata=df[["age", "gender", "bmi", "noOfchildren", "smoker", "region"]]
 lr1.fit(bigdata,ydata)
 lr1.predict(bigdata)
-# print(lr1.score(bigdata,ydata))
+print(lr1.score(bigdata,ydata))
 Input=[('scale',StandardScaler()),('polynomial',PolynomialFeatures(include_bias=False)),('model',LinearRegression())]
 pipe=Pipeline(Input)
 pipe.fit(bigdata,ydata)
 pred=pipe.predict(bigdata)
-# print(r2_score(ydata,pred))
+print(r2_score(ydata,pred))
 
 xtrain,xtest,ytrain,ytest=train_test_split(bigdata,ydata,test_size=0.20,random_state=0)
 
@@ -58,8 +58,8 @@ from sklearn.linear_model import Ridge
 RR=Ridge(alpha=0.1)
 RR.fit(xtrain,ytrain)
 predRR=RR.predict(xtest)
-# print('predicted:', pred[0:4])
-# print('test set :', ytest[0:4].values)
+print('predicted:', pred[0:4])
+print('test set :', ytest[0:4].values)
 
 pr=PolynomialFeatures(degree=2)
 xtrainpr=pr.fit_transform(xtrain)
